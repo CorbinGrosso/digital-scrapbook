@@ -23,6 +23,6 @@
     }
   },
   "rules": {
-    // Customize rules as needed
+    "react/react-in-jsx-scope": "off",
   }
 }
