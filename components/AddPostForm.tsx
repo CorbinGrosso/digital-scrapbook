@@ -1,7 +1,3 @@
-"use client";
-
-import { sql } from '@vercel/postgres';
-import { NextResponse } from 'next/server';
 import { useState } from 'react';
 
 export default function AddPostForm() {
@@ -21,7 +17,7 @@ export default function AddPostForm() {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async () => {
         console.log(postData);
         // await sql`INSERT INTO Posts (title, caption, date) VALUES (${postData.title}, ${postData.caption}, ${postData.date});`;
         // Handle form submission, e.g., send data to your server
@@ -33,42 +29,50 @@ export default function AddPostForm() {
         <form onSubmit={handleSubmit}>
             {/* Get new Post information */}
 
-            <label>Title of Milestone:</label>
-            <input
-                type="text"
-                name="milestone"
-                value={postData.title}
-                onChange={handleChange}
-                required
-            />
+            <label>
+                Title of Milestone:
+                <input
+                    type="text"
+                    name="milestone"
+                    value={postData.title}
+                    onChange={handleChange}
+                    required
+                />
+            </label>
 
-            <label>Date of Milestone:</label>
-            <input
-                type="date"
-                name="date"
-                value={postData.date}
-                onChange={handleChange}
-                required
-            />
+            <label>
+                Date of Milestone:
+                <input
+                    type="date"
+                    name="date"
+                    value={postData.date}
+                    onChange={handleChange}
+                    required
+                />
+            </label>
 
-            <label>Caption:</label>
-            <input
-                type="text"
-                name="Milestone"
-                value={postData.title}
-                onChange={handleChange}
-                required
-            />
+            <label>
+                Caption:
+                <input
+                    type="text"
+                    name="Milestone"
+                    value={postData.title}
+                    onChange={handleChange}
+                    required
+                />
+            </label>
 
-            <label>Images:</label>
-            <input
-                type="file"
-                name="files"
-                accept="image/*"
-                onChange={handleChange}
-                required
-                multiple
-            />
+            <label>
+                Images:
+                <input
+                    type="file"
+                    name="files"
+                    accept="image/*"
+                    onChange={handleChange}
+                    required
+                    multiple
+                />
+            </label>
 
             <button type="submit">Post</button>
 
