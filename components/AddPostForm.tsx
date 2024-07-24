@@ -11,7 +11,7 @@ export default function AddPostForm() {
         'files': null,
     })
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, files } = e.target;
         setPostData({
             ...postData,
