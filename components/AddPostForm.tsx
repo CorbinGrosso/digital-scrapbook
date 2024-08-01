@@ -27,7 +27,7 @@ export default function AddPostForm() {
 
     function handleAddMediaButton() {
         setMediaCount(mediaCount + 1);
-        let tempMedia = postData.media;
+        const tempMedia = postData.media;
         tempMedia.push({
             'file': null,
             'caption': ""
@@ -43,7 +43,7 @@ export default function AddPostForm() {
         console.log(postData);
         // if the final char in the name is a number, it is meant for the media array
         if (/^\d/.test(name[name.length - 1])) {
-            let index = Number(name.replace(/^\D+/g, ''));
+            const index = Number(name.replace(/^\D+/g, ''));
             // name == 'file'
             if (name[0] == "f" && files) {
                 setPostData(prevData => ({
@@ -75,7 +75,7 @@ export default function AddPostForm() {
                 }));
             }
         } else {
-            setPostData(prevData => ({
+            setPostData(({
                 ...postData,
                 [name]: value
             }));
@@ -90,42 +90,37 @@ export default function AddPostForm() {
         // Handle form submission, e.g., send data to your server
     };
 
-    function AddMedia() {
-        let output = [];
-        for (let i = 0; i <= mediaCount; i++) {
-            output.push(
-                <div key={i}>
-                    <label>
-                        Image:
-                        <br />
-                        <input
-                            type="file"
-                            name={`file${i}`}
-                            accept="image/*"
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
+    const output = [];
+    for (let i = 0; i <= mediaCount; i++) {
+        output.push(
+            <div key={i}>
+                <label>
+                    Image:
                     <br />
+                    <input
+                        type="file"
+                        name={`file${i}`}
+                        accept="image/*"
+                        onChange={handleChange}
+                        required
+                    />
+                </label>
+                <br />
 
-                    <label>
-                        Caption:
-                        <br />
-                        <input
-                            type="text"
-                            name={`caption${i}`}
-                            value={postData.media[i].caption}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
+                <label>
+                    Caption:
                     <br />
-                </div>
-            );
-        }
-        return <>
-            {output}
-        </>
+                    <input
+                        type="text"
+                        name={`caption${i}`}
+                        value={postData.media[i].caption}
+                        onChange={handleChange}
+                        required
+                    />
+                </label>
+                <br />
+            </div>
+        );
     }
 
     return <div style={{ "background": "grey", "color": "black" }}>
@@ -160,7 +155,7 @@ export default function AddPostForm() {
             </label>
             <br />
 
-            <AddMedia />
+            {output}
 
             <button onClick={handleAddMediaButton} style={{ "borderWidth": "2px", "margin": "2px" }}>Add more media</button>
 
