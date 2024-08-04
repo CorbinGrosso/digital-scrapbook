@@ -123,10 +123,8 @@ export default function AddPostForm() {
         );
     }
 
-    return <div style={{ "background": "grey", "color": "black" }}>
-        <h1>Create a New Post</h1>
-
-        <form onSubmit={handleSubmit}>
+    return <div>
+        <form id="newPostForm" onSubmit={handleSubmit}>
             {/* Get new Post information */}
 
             <label>

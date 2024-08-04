@@ -45,6 +45,35 @@ body {
   text-decoration: underline;
 }
 
+#header {
+  text-align: center;
+  background: rgb(150, 150, 150);
+  padding-bottom: 1vh;
+}
+
+#header h1 {
+  font-size: 2rem;
+}
+
+#header nav button {
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+#body h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1vh;
+  margin-top: 1vh;
+}
+
+#newPostForm {
+  margin-left: 20vw;
+  margin-right: 20vw;
+  padding: 5vw;
+  background: rgb(150, 150, 150);
+}
+
 @media only screen and (max-width: 600px) {
   /* Insert any mobile-specific CSS here */
 }
