@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 
 export default function Home() {
@@ -14,7 +13,9 @@ export default function Home() {
   }
   
   function Body() {
-  
+    return <div id="body">
+
+    </div>
   }
   
   function Footer() {
@@ -29,6 +30,8 @@ export default function Home() {
   return (
     <div>
     <Header />
+
+    <Body />
 
     <Footer />
     </div>
