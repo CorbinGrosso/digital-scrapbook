@@ -6,8 +6,7 @@ export async function GET() {
         const result =
             await sql`CREATE TABLE Posts (
                 id SERIAL PRIMARY KEY,
-                title VARCHAR(25) NOT NULL,
-                caption VARCHAR(255) NOT NULL,
+                title VARCHAR(50) NOT NULL,
                 date DATE NOT NULL
              );`;
         return NextResponse.json({ result }, { status: 200 });

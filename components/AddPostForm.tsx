@@ -1,93 +1,25 @@
 "use client";
 
-import { useState } from 'react';
-
-interface Media {
-    file: File | null;
-    caption: string;
-}
-
-interface PostData {
-    title: string;
-    date: string;
-    media: Array<Media>;
-}
+import { useState, useRef } from 'react';
+import { UploadPostToDatabase } from '@/app/SqlLib'
 
 export default function AddPostForm() {
-
-    const [postData, setPostData] = useState<PostData>({
-        'title': '',
-        'date': '',
-        'media': [{
-            'file': null,
-            'caption': ""
-        }],
-    })
     const [mediaCount, setMediaCount] = useState(0);
+    const formRef = useRef();
 
     function handleAddMediaButton() {
         setMediaCount(mediaCount + 1);
-        const tempMedia = postData.media;
-        tempMedia.push({
-            'file': null,
-            'caption': ""
-        });
-        setPostData({
-            ...postData,
-            'media': tempMedia
-        });
     }
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value, files } = e.target;
-        console.log(postData);
-        // if the final char in the name is a number, it is meant for the media array
-        if (/^\d/.test(name[name.length - 1])) {
-            const index = Number(name.replace(/^\D+/g, ''));
-            // name == 'file'
-            if (name[0] == "f" && files) {
-                setPostData(prevData => ({
-                    ...postData,
-                    'media': prevData['media'].map((media, i) => {
-                        if (i == index) {
-                            return {
-                                ...media,
-                                'file': files[0]
-                            }
-                        } else {
-                            return media;
-                        }
-                    })
-                }));
-            } else { // name == 'caption'
-                setPostData(prevData => ({
-                    ...postData,
-                    'media': prevData['media'].map((media, i) => {
-                        if (i == index) {
-                            return {
-                                ...media,
-                                'caption': value
-                            }
-                        } else {
-                            return media;
-                        }
-                    })
-                }));
-            }
-        } else {
-            setPostData(({
-                ...postData,
-                [name]: value
-            }));
-        }
-    };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(postData);
-        // await sql`INSERT INTO Posts (title, caption, date) 
-        //  VALUES (${postData.title}, ${postData.caption}, ${postData.date});`;
-        // Handle form submission, e.g., send data to your server
+        let formElem = document.getElementById("newPostForm") as HTMLFormElement | null;
+        if (typeof formElem === 'undefined' || formElem === null) {
+            throw Error("Couldn't find form.")
+        }
+        const data = new FormData(formElem);
+        console.log("Submitted")
+        UploadPostToDatabase(data);
     };
 
     const output = [];
@@ -101,7 +33,6 @@ export default function AddPostForm() {
                         type="file"
                         name={`file${i}`}
                         accept="image/*"
-                        onChange={handleChange}
                         required
                     />
                 </label>
@@ -113,8 +44,6 @@ export default function AddPostForm() {
                     <input
                         type="text"
                         name={`caption${i}`}
-                        value={postData.media[i].caption}
-                        onChange={handleChange}
                         required
                     />
                 </label>
@@ -124,7 +53,7 @@ export default function AddPostForm() {
     }
 
     return <div>
-        <form id="newPostForm" onSubmit={handleSubmit}>
+        <form id="newPostForm" onSubmit={handleSubmit} action={UploadPostToDatabase}>
             {/* Get new Post information */}
 
             <label>
@@ -133,8 +62,6 @@ export default function AddPostForm() {
                 <input
                     type="text"
                     name="title"
-                    value={postData.title}
-                    onChange={handleChange}
                     required
                 />
             </label>
@@ -146,8 +73,6 @@ export default function AddPostForm() {
                 <input
                     type="date"
                     name="date"
-                    value={postData.date}
-                    onChange={handleChange}
                     required
                 />
             </label>
@@ -155,11 +80,11 @@ export default function AddPostForm() {
 
             {output}
 
-            <button onClick={handleAddMediaButton} style={{ "borderWidth": "2px", "margin": "2px" }}>Add more media</button>
+            <button onClick={handleAddMediaButton}>Add more media</button>
 
             <br />
 
-            <button type="submit" style={{ "borderWidth": "2px", "margin": "2px" }}>Post</button>
+            <button type="submit">Post</button>
 
         </form>
     </div>

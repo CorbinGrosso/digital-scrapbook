@@ -14,7 +14,7 @@ export default function Home() {
 
   function Header() {
     return <div id="header" >
-      <h1 id="title">Instagram</h1> {/* Change this later */}
+      <h1 id="title">Digital Scrapbook</h1> {/* Change this later */}
       <nav>
         <button onClick={()=>{setCurrentScreen(SCREENS.HOME)}}>Home</button>
         <button onClick={()=>{setCurrentScreen(SCREENS.CREATE_NEW_POST)}}>Upload</button>

@@ -74,6 +74,16 @@ body {
   background: rgb(150, 150, 150);
 }
 
+#newPostForm button {
+  border-width: 2px;
+  margin: 2px;
+}
+
+#newPostForm img {
+  width: 25%;
+  height: 25%;
+}
+
 @media only screen and (max-width: 600px) {
   /* Insert any mobile-specific CSS here */
 }
