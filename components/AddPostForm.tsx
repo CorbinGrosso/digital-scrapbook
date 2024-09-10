@@ -5,7 +5,6 @@ import { UploadPostToDatabase } from '@/app/SqlLib'
 
 export default function AddPostForm() {
     const [mediaCount, setMediaCount] = useState(0);
-    const formRef = useRef();
 
     function handleAddMediaButton() {
         setMediaCount(mediaCount + 1);
@@ -13,7 +12,7 @@ export default function AddPostForm() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        let formElem = document.getElementById("newPostForm") as HTMLFormElement | null;
+        const formElem = document.getElementById("newPostForm") as HTMLFormElement | null;
         if (typeof formElem === 'undefined' || formElem === null) {
             throw Error("Couldn't find form.")
         }
@@ -53,7 +52,7 @@ export default function AddPostForm() {
     }
 
     return <div>
-        <form id="newPostForm" onSubmit={handleSubmit} action={UploadPostToDatabase}>
+        <form id="newPostForm" onSubmit={handleSubmit} action={String(UploadPostToDatabase)}>
             {/* Get new Post information */}
 
             <label>
