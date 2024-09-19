@@ -21,12 +21,15 @@ export async function UploadPostToDatabase(formData: FormData) {
                                 WHERE title=$1 AND date=$2`, [title, date]);
         const postId = results.rows[0].id;
         for (let i=0; i < media.length; i++) {
+                console.log("Attempting media")
                 if (media[i].hasCaption) {
                         await sql`INSERT INTO Media (media, description, post_id)
                                 VALUES (${URL.createObjectURL(media[i].media)}, ${media[i].caption}, ${postId});`;
+                                console.log("Media if statement success!")
                 } else {
                         await sql`INSERT INTO Media (media, post_id)
                                 VALUES (${URL.createObjectURL(media[i].media)}, ${postId});`;
+                                console.log("Media else statement success!")
                 }
         }
 }
