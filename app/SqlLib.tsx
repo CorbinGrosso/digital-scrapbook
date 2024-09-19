@@ -19,14 +19,14 @@ export async function UploadPostToDatabase(formData: FormData) {
                 VALUES (${title}, ${date});`;
         const results = await sql.query(`SELECT id FROM Posts 
                                 WHERE title=$1 AND date=$2`, [title, date]);
-        console.log(results.rows[0].id);
+        const postId = results.rows[0].id;
         for (let i=0; i < media.length; i++) {
                 if (media[i].hasCaption) {
                         await sql`INSERT INTO Media (media, description, post_id)
-                                VALUES (${URL.createObjectURL(media[i].media)}, ${media[i].caption}, ${0});`;
+                                VALUES (${URL.createObjectURL(media[i].media)}, ${media[i].caption}, ${postId});`;
                 } else {
                         await sql`INSERT INTO Media (media, post_id)
-                                VALUES (${URL.createObjectURL(media[i].media)}, ${0});`;
+                                VALUES (${URL.createObjectURL(media[i].media)}, ${postId});`;
                 }
         }
 }
