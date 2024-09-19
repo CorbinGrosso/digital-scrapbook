@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Instagram",
-  description: "Instagram-inspired digital scrapbook dedicated to my girlfriend Jamie",
+  title: "Digital Scrapbook",
+  description: "Digital scrapbook dedicated to my girlfriend Jamie",
 };
 
 export default function RootLayout({
