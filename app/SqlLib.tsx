@@ -7,7 +7,7 @@ export async function UploadPostToDatabase(formData: FormData) {
         const title = String(formData.get('title'));
         const date = String(formData.get('date'));
         const media = [];
-        for (let i=0; formData.get(`media${i}`); i++) {
+        for (let i=0; formData.get(`file${i}`) != null; i++) {
                 if (formData.get(`caption${i}`)) {
                         media.push({'hasCaption': true, 'media': new Blob([String(formData.get(`media${i}`))]), 'caption': String(formData.get(`caption${i}`))});
                 } else {
