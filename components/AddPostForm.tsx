@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { UploadPostToDatabase } from '@/app/SqlLib'
 
 export default function AddPostForm() {
