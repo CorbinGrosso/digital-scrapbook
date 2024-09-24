@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { UploadPostToDatabase } from '@/app/SqlLib'
+import { UploadChapterToDatabase } from '@/app/lib/SqlLib'
 
 export default function AddPostForm() {
     const [mediaCount, setMediaCount] = useState(0);
@@ -18,7 +18,7 @@ export default function AddPostForm() {
         }
         const data = new FormData(formElem);
         console.log("Submitted")
-        UploadPostToDatabase(data);
+        UploadChapterToDatabase(data);
     };
 
     const output = [];
@@ -52,7 +52,7 @@ export default function AddPostForm() {
     }
 
     return <div>
-        <form id="newPostForm" onSubmit={handleSubmit} action={String(UploadPostToDatabase)}>
+        <form id="newPostForm" onSubmit={handleSubmit} action={String(UploadChapterToDatabase)}>
             {/* Get new Post information */}
 
             <label>

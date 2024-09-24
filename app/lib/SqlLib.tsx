@@ -2,7 +2,7 @@
 
 import { sql } from '@vercel/postgres';
 
-export async function UploadPostToDatabase(formData: FormData) {
+export async function UploadChapterToDatabase(formData: FormData) {
         
         const title = String(formData.get('title'));
         const date = String(formData.get('date'));
@@ -29,4 +29,12 @@ export async function UploadPostToDatabase(formData: FormData) {
                                 VALUES (${URL.createObjectURL(media[i].media)}, ${postId});`;
                 }
         }
+}
+
+export async function GetChaptersFromDatabase() {
+
+}
+
+export async function GetPagesFromDatabase() {
+
 }
