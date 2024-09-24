@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ChapterProps {
-    title: String,
+    title: string,
     date: Date
 }
 
