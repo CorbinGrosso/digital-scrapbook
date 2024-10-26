@@ -33,9 +33,10 @@ body {
 }
 
 #footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   text-align: center;
   font-size: 1rem;
   background: rgb(150, 150, 150);
